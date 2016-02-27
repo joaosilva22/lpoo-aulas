@@ -15,21 +15,4 @@ public class Heroi extends Elemento {
 	public void setArmed(boolean a) {
 		armed = a;
 	}
-	
-	public void moveUp() {
-		setPosition(getPositionX(), getPositionY() - 1);
-	}
-	
-	public void moveDown() {
-		setPosition(getPositionX(), getPositionY() + 1);
-	}
-	
-	public void moveLeft() {
-		setPosition(getPositionX() - 1, getPositionY());
-	}
-	
-	public void moveRight() {
-		setPosition(getPositionX() + 1, getPositionY());
-	}
-	
 }

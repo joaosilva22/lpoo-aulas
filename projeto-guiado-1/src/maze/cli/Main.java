@@ -6,7 +6,8 @@ import maze.logic.Jogo;
 public class Main {
 	
 	// Interface com a linha de comandos
-	// 8, 2, 4, 6 correspondem a cima, baixo, direita e esquerda respectivamente
+	// Os numeros 8, 2, 4, 6 correspondem a cima, baixo, direita e esquerda respectivamente
+	// qualquer outro numero termina o programa
 	public static void main(String[] args) {
 		int move;
 		Scanner s = new Scanner(System.in);

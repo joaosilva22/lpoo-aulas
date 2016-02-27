@@ -12,6 +12,5 @@ public class Dragao extends Elemento {
 			return true;
 		else
 			return false;
-			
 	}
 }
