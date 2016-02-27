@@ -33,7 +33,6 @@ public class Jogo {
 		if (lab.getCell(hero.getPositionX(), hero.getPositionY() + 1) != 'x') {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveDown();
-			//lab.updateBoardHero(hero.getPositionX(), hero.getPositionY(), hero.isAlive(), hero.isArmed());
 		}
 	}
 	
@@ -41,7 +40,6 @@ public class Jogo {
 		if (lab.getCell(hero.getPositionX(), hero.getPositionY() - 1) != 'x') {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveUp();
-			//lab.updateBoardHero(hero.getPositionX(), hero.getPositionY(), hero.isAlive(), hero.isArmed());
 		}	
 	}
 	
@@ -49,7 +47,6 @@ public class Jogo {
 		if (lab.getCell(hero.getPositionX() - 1, hero.getPositionY()) != 'x') {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveLeft();
-			//lab.updateBoardHero(hero.getPositionX(), hero.getPositionY(), hero.isAlive(), hero.isArmed());
 		}	
 	}
 	
@@ -57,7 +54,6 @@ public class Jogo {
 		if (lab.getCell(hero.getPositionX() + 1, hero.getPositionY()) != 'x') {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveRight();
-			//lab.updateBoardHero(hero.getPositionX(), hero.getPositionY(), hero.isAlive(), hero.isArmed());
 		}
 	}
 	
