@@ -2,6 +2,7 @@ package maze.cli;
 
 import java.util.Scanner;
 import maze.logic.Jogo;
+import maze.logic.JogoMovimentoAleatorio;
 
 public class Main {
 	
@@ -11,8 +12,8 @@ public class Main {
 	public static void main(String[] args) {
 		int move;
 		Scanner s = new Scanner(System.in);
+		Jogo game = new JogoMovimentoAleatorio();
 		
-		Jogo game = new Jogo();
 		game.display();
 		while (!game.isDone()) {
 			move = s.nextInt();

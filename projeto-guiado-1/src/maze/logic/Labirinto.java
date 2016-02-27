@@ -36,11 +36,15 @@ public class Labirinto {
 			cleanCell(x, y);
 	}
 	
-	public void updateBoardDragon(int x, int y, boolean alive) {
-		if (alive)
-			board[y][x] = 'D';
-		else
+	public void updateBoardDragon(int x, int y, boolean alive, boolean overlapping) {
+		if (alive) {
+			if (overlapping)
+				board[y][x] = 'F';
+			else
+				board[y][x] = 'D';
+		} else {
 			cleanCell(x, y);
+		}
 	}
 	
 	public void display() {

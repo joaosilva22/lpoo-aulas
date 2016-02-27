@@ -3,6 +3,8 @@ package maze.logic;
 import java.lang.Math;
 
 public class Dragao extends Elemento {
+	private boolean overlapping = false;
+	
 	public Dragao(int x, int y) {
 		super(x, y);
 	}
@@ -13,5 +15,13 @@ public class Dragao extends Elemento {
 			return true;
 		else
 			return false;
+	}
+	
+	public boolean isOverlapping() {
+		return overlapping;
+	}
+	
+	public void setOverlapping(boolean o) {
+		overlapping = o;
 	}
 }

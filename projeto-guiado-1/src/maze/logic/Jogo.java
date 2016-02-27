@@ -20,7 +20,7 @@ public class Jogo {
 		fs = FinalState.QUIT;
 		
 		lab.updateBoardHero(hero.getPositionX(), hero.getPositionY(), hero.isAlive(), hero.isArmed());
-		lab.updateBoardDragon(dragon.getPositionX(), dragon.getPositionY(), dragon.isAlive());
+		lab.updateBoardDragon(dragon.getPositionX(), dragon.getPositionY(), dragon.isAlive(), dragon.isOverlapping());
 		lab.updateBoardSword(sword.getPositionX(), sword.getPositionY(), sword.isAlive());
 	}
 	
@@ -66,19 +66,19 @@ public class Jogo {
 				fs = FinalState.DEFEAT;
 				done = true;
 			}
-			lab.updateBoardDragon(dragon.getPositionX(), dragon.getPositionY(), dragon.isAlive());
 		}
-		
-		if (sword.inRange(hero.getPositionX(), hero.getPositionY())) {
+		if (sword.inRange(hero.getPositionX(), hero.getPositionY()))
 			hero.setArmed(true);
-			lab.updateBoardSword(sword.getPositionX(), sword.getPositionY(), sword.isAlive());
-		}
-		
+		if (sword.inRange(dragon.getPositionX(), dragon.getPositionY()))
+			dragon.setOverlapping(true);
+		else
+			dragon.setOverlapping(false);
 		if (!dragon.isAlive() && lab.getCell(hero.getPositionX(), hero.getPositionY()) == 's') {
 			fs = FinalState.VICTORY;
 			done = true;
 		}
-			
+		lab.updateBoardSword(sword.getPositionX(), sword.getPositionY(), sword.isAlive());
+		lab.updateBoardDragon(dragon.getPositionX(), dragon.getPositionY(), dragon.isAlive(), dragon.isOverlapping());
 		lab.updateBoardHero(hero.getPositionX(), hero.getPositionY(), hero.isAlive(), hero.isArmed());
 	}
 	
@@ -94,5 +94,13 @@ public class Jogo {
 		if (fs == FinalState.DEFEAT) System.out.println("Derrota, o dragao venceu...");
 		if (fs == FinalState.VICTORY) System.out.println("Vitoria, o heroi venceu!");
 		if (fs == FinalState.QUIT) System.out.println("Jogo terminado pelo utilizador.");
+	}
+	
+	public Dragao getDragon() {
+		return dragon;
+	}
+	
+	public Labirinto getLab() {
+		return lab;
 	}
 }
