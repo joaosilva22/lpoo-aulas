@@ -67,8 +67,10 @@ public class Jogo {
 				done = true;
 			}
 		}
-		if (sword.inRange(hero.getPositionX(), hero.getPositionY()))
+		if (sword.inRange(hero.getPositionX(), hero.getPositionY())) {
 			hero.setArmed(true);
+			sword.setAlive(false);
+		}
 		if (sword.inRange(dragon.getPositionX(), dragon.getPositionY()))
 			dragon.setOverlapping(true);
 		else
