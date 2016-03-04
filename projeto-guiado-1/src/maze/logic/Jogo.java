@@ -20,7 +20,7 @@ public class Jogo {
 		fs = FinalState.QUIT;
 		
 		lab.updateBoardHero(hero.getPositionX(), hero.getPositionY(), hero.isAlive(), hero.isArmed());
-		lab.updateBoardDragon(dragon.getPositionX(), dragon.getPositionY(), dragon.isAlive(), dragon.isOverlapping());
+		lab.updateBoardDragon(dragon.getPositionX(), dragon.getPositionY(), dragon.isAlive(), dragon.isOverlapping(), dragon.isSleeping());
 		lab.updateBoardSword(sword.getPositionX(), sword.getPositionY(), sword.isAlive());
 	}
 	
@@ -59,6 +59,7 @@ public class Jogo {
 	
 	public void updateGame() {
 		updateInteractions();
+		updateSword();
 		updateDragon();
 		updateHero();
 	}
@@ -68,17 +69,21 @@ public class Jogo {
 	}
 	
 	protected void updateDragon() {
-		lab.updateBoardDragon(dragon.getPositionX(), dragon.getPositionY(), dragon.isAlive(), dragon.isOverlapping());
+		lab.updateBoardDragon(dragon.getPositionX(), dragon.getPositionY(), dragon.isAlive(), dragon.isOverlapping(), dragon.isSleeping());
+	}
+	
+	protected void updateSword() {
+		lab.updateBoardSword(sword.getPositionX(), sword.getPositionY(), sword.isAlive());
 	}
 	
 	protected void updateInteractions() {
 		if (dragon.inRange(hero.getPositionX(), hero.getPositionY())) {
-			if (hero.isArmed()) {
-				dragon.setAlive(false);
-			} else {
+			if (!hero.isArmed()) {
 				hero.setAlive(false);
 				fs = FinalState.DEFEAT;
-				done = true;
+				done = true;	
+			} else {
+				dragon.setAlive(false);
 			}
 		}
 		if (sword.inRange(hero.getPositionX(), hero.getPositionY()) && sword.isAlive()) {
@@ -93,7 +98,6 @@ public class Jogo {
 			fs = FinalState.VICTORY;
 			done = true;
 		}
-		lab.updateBoardSword(sword.getPositionX(), sword.getPositionY(), sword.isAlive());
 	}
 	
 	public boolean isDone() {

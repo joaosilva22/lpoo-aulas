@@ -4,6 +4,7 @@ import java.lang.Math;
 
 public class Dragao extends Elemento {
 	private boolean overlapping = false;
+	private boolean sleeping = false;
 	
 	public Dragao(int x, int y) {
 		super(x, y);
@@ -23,5 +24,13 @@ public class Dragao extends Elemento {
 	
 	public void setOverlapping(boolean o) {
 		overlapping = o;
+	}
+	
+	public boolean isSleeping() {
+		return sleeping;
+	}
+	
+	public void setSleeping(boolean s) {
+		sleeping = s;
 	}
 }
