@@ -58,6 +58,20 @@ public class Jogo {
 	}
 	
 	public void updateGame() {
+		updateInteractions();
+		updateDragon();
+		updateHero();
+	}
+	
+	protected void updateHero() {
+		lab.updateBoardHero(hero.getPositionX(), hero.getPositionY(), hero.isAlive(), hero.isArmed());
+	}
+	
+	protected void updateDragon() {
+		lab.updateBoardDragon(dragon.getPositionX(), dragon.getPositionY(), dragon.isAlive(), dragon.isOverlapping());
+	}
+	
+	protected void updateInteractions() {
 		if (dragon.inRange(hero.getPositionX(), hero.getPositionY())) {
 			if (hero.isArmed()) {
 				dragon.setAlive(false);
@@ -67,7 +81,7 @@ public class Jogo {
 				done = true;
 			}
 		}
-		if (sword.inRange(hero.getPositionX(), hero.getPositionY())) {
+		if (sword.inRange(hero.getPositionX(), hero.getPositionY()) && sword.isAlive()) {
 			hero.setArmed(true);
 			sword.setAlive(false);
 		}
@@ -80,8 +94,6 @@ public class Jogo {
 			done = true;
 		}
 		lab.updateBoardSword(sword.getPositionX(), sword.getPositionY(), sword.isAlive());
-		lab.updateBoardDragon(dragon.getPositionX(), dragon.getPositionY(), dragon.isAlive(), dragon.isOverlapping());
-		lab.updateBoardHero(hero.getPositionX(), hero.getPositionY(), hero.isAlive(), hero.isArmed());
 	}
 	
 	public boolean isDone() {
@@ -104,5 +116,9 @@ public class Jogo {
 	
 	public Labirinto getLab() {
 		return lab;
+	}
+	
+	public Heroi getHero() {
+		return hero;
 	}
 }

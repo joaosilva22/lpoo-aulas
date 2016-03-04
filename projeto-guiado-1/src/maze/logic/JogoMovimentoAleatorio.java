@@ -11,11 +11,17 @@ public class JogoMovimentoAleatorio extends Jogo {
 	}
 	
 	public void updateGame() {
+		updateInteractions();
+		updateDragon();
+		updateHero();
+	}
+	
+	protected void updateDragon() {
 		boolean dragonMoved = false;
 		while (!dragonMoved) {
 			dragonMoved = moveDragon();
 		}
-		super.updateGame();
+		getLab().updateBoardDragon(getDragon().getPositionX(), getDragon().getPositionY(), getDragon().isAlive(), getDragon().isOverlapping());
 	}
 	
 	private boolean moveDragon() {
