@@ -1,12 +1,11 @@
 package maze.logic;
 
 public class Elemento {
-	private int x, y;
+	private Point position;
 	private boolean alive;
 	
-	public Elemento(int posX, int posY) {
-		x = posX;
-		y = posY;
+	public Elemento(Point pos) {
+		position = pos;
 		alive = true;
 	}
 	
@@ -18,17 +17,20 @@ public class Elemento {
 		return alive;
 	}
 	
-	public void setPosition(int posX, int posY) {
-		x = posX;
-		y = posY;
+	public void setPosition(int x, int y) {
+		position.set(x, y);
 	}
 	
 	public int getPositionX() {
-		return x;
+		return position.getX();
 	}
 	
 	public int getPositionY() {
-		return y;
+		return position.getY();
+	}
+	
+	public Point getPosition() {
+		return position;
 	}
 	
 	public void moveUp() {

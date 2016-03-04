@@ -6,8 +6,8 @@ public class Dragao extends Elemento {
 	private boolean overlapping = false;
 	private boolean sleeping = false;
 	
-	public Dragao(int x, int y) {
-		super(x, y);
+	public Dragao(Point pos) {
+		super(pos);
 	}
 	
 	// Verifica se o elemento com as coordenadas x, y esta numa celula adjacente ao dragao

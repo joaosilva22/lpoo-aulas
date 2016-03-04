@@ -10,11 +10,11 @@ public class Jogo {
 	public enum FinalState { VICTORY, DEFEAT, QUIT }
 	private FinalState fs;
 	
-	public Jogo() {
-		lab = new Labirinto();
-		hero = new Heroi(1, 1);
-		dragon = new Dragao(5, 1);
-		sword = new Espada(6, 4);
+	public Jogo(char[][] board) {
+		lab = new Labirinto(board);
+		hero = new Heroi(lab.findHeroPosition());
+		dragon = new Dragao(lab.findDragonPosition());
+		sword = new Espada(lab.findSwordPosition());
 		done = false;
 		
 		fs = FinalState.QUIT;
@@ -77,6 +77,10 @@ public class Jogo {
 	}
 	
 	protected void updateInteractions() {
+		if (sword.inRange(hero.getPositionX(), hero.getPositionY()) && sword.isAlive()) {
+			hero.setArmed(true);
+			sword.setAlive(false);
+		}
 		if (dragon.inRange(hero.getPositionX(), hero.getPositionY())) {
 			if (!hero.isArmed()) {
 				hero.setAlive(false);
@@ -86,15 +90,11 @@ public class Jogo {
 				dragon.setAlive(false);
 			}
 		}
-		if (sword.inRange(hero.getPositionX(), hero.getPositionY()) && sword.isAlive()) {
-			hero.setArmed(true);
-			sword.setAlive(false);
-		}
 		if (sword.inRange(dragon.getPositionX(), dragon.getPositionY()))
 			dragon.setOverlapping(true);
 		else
 			dragon.setOverlapping(false);
-		if (!dragon.isAlive() && lab.getCell(hero.getPositionX(), hero.getPositionY()) == 's') {
+		if (!dragon.isAlive() && lab.getCell(hero.getPositionX(), hero.getPositionY()) == 's' && hero.isArmed()) {
 			fs = FinalState.VICTORY;
 			done = true;
 		}

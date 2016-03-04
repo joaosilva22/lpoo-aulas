@@ -5,8 +5,8 @@ import java.util.Random;
 public class JogoMovimentoAleatorio extends Jogo {
 	private Random r;
 	
-	public JogoMovimentoAleatorio() {
-		super();
+	public JogoMovimentoAleatorio(char[][] board) {
+		super(board);
 		r = new Random();
 	}
 	

@@ -7,8 +7,8 @@ public class JogoDragaoAdormece extends JogoMovimentoAleatorio {
 	private static final float SLEEPING_CHANCE = 0.2f;
 	private Random s;
 	
-	public JogoDragaoAdormece() {
-		super();
+	public JogoDragaoAdormece(char[][] board) {
+		super(board);
 		s = new Random();
 	}
 	

@@ -1,8 +1,8 @@
 package maze.logic;
 
 public class Espada extends Elemento {
-	public Espada(int x, int y) {
-		super(x, y);
+	public Espada(Point pos) {
+		super(pos);
 	}
 	
 	// Verifica se o elemento com coordenadas x, y esta na mesma posicao da espada

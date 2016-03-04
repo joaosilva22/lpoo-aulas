@@ -3,8 +3,8 @@ package maze.logic;
 public class Heroi extends Elemento {
 	private boolean armed;
 	
-	public Heroi(int x, int y) {
-		super(x, y);
+	public Heroi(Point pos) {
+		super(pos);
 		armed = false;
 	}
 	

@@ -1,18 +1,11 @@
 package maze.logic;
 
 public class Labirinto {
-	private char[][] board = {
-			{ 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x' },
-			{ 'x', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'x' },
-			{ 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' },
-			{ 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' },
-			{ 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' },
-			{ 'x', ' ', ' ', ' ', ' ', ' ', ' ', 'x', ' ', 's' },
-			{ 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' },
-			{ 'x', ' ', 'x', 'x', ' ', 'x', ' ', 'x', ' ', 'x' },
-			{ 'x', ' ', 'x', 'x', ' ', ' ', ' ', 'x', ' ', 'x' },
-			{ 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x' }
-	};
+	private char[][] board;
+	
+	public Labirinto(char[][] maze) {
+		board = maze;
+	}
 	
 	public void cleanCell(int x, int y) {
 		board[y][x] = ' ';
@@ -65,5 +58,44 @@ public class Labirinto {
 	
 	public char getCell(int x, int y) {
 		return board[y][x];
+	}
+	
+	public Point findHeroPosition()
+	{
+		for(int i = 1; i < board.length - 1; i++)
+			for(int j = 1; j < board[i].length - 1; j++)
+				if(board[i][j] == 'H')
+				{
+					Point p = new Point (j,i);
+					return p;
+				}
+		Point p2 = new Point(-1, -1);
+		return p2;
+	}
+	
+	public Point findDragonPosition()
+	{
+		for(int i = 1; i < board.length - 1; i++)
+			for(int j = 1; j < board[i].length - 1; j++)
+				if(board[i][j] == 'D')
+				{
+					Point p = new Point (j,i);
+					return p;
+				}
+		Point p2 = new Point(-1, -1);
+		return p2;
+	}
+	
+	public Point findSwordPosition()
+	{
+		for(int i = 1; i < board.length - 1; i++)
+			for(int j = 1; j < board[i].length - 1; j++)
+				if(board[i][j] == 'E')
+				{
+					Point p = new Point (j,i);
+					return p;
+				}
+		Point p2 = new Point(-1, -1);
+		return p2;
 	}
 }
