@@ -48,10 +48,14 @@ public class Labirinto {
 	}
 	
 	public void display() {
-		for (char[] line : board) {
-			for (char cell : line) {
-				System.out.print(cell + " ");
-			}
+		System.out.printf("  ");
+		for (int k = 0; k < board.length; k++)
+			System.out.printf("%2d", k);
+		System.out.println();
+		for (int i = 0; i < board.length; i++) {
+			System.out.printf("%2d ", i);
+			for (int j = 0; j < board[i].length; j++)
+				System.out.print(board[i][j] + " ");
 			System.out.println();
 		}
 	}

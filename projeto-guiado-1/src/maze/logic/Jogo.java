@@ -29,50 +29,66 @@ public class Jogo {
 		System.out.println();
 	}
 
-	public void moveHeroDown() {
+	public boolean moveHeroDown() {
 		if (lab.getCell(hero.getPositionX(), hero.getPositionY() + 1) != 'x') {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveDown();
+			updateGame();
+			return true;
 		}
+		return false;
 	}
 	
-	public void moveHeroUp() {
+	public boolean moveHeroUp() {
 		if (lab.getCell(hero.getPositionX(), hero.getPositionY() - 1) != 'x') {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveUp();
-		}	
+			updateGame();
+			return true;
+		}
+		return false;
 	}
 	
-	public void moveHeroLeft() {
+	public boolean moveHeroLeft() {
 		if (lab.getCell(hero.getPositionX() - 1, hero.getPositionY()) != 'x') {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveLeft();
-		}	
+			updateGame();
+			return true;
+		}
+		return false;
 	}
 	
-	public void moveHeroRight() {
+	public boolean moveHeroRight() {
 		if (lab.getCell(hero.getPositionX() + 1, hero.getPositionY()) != 'x') {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveRight();
+			updateGame();
+			return true;
 		}
+		return false;
 	}
 	
+	public void moveDragon() {}
+	
 	public void updateGame() {
-		updateInteractions();
 		updateSword();
 		updateDragon();
 		updateHero();
 	}
 	
 	protected void updateHero() {
+		updateInteractions();
 		lab.updateBoardHero(hero.getPositionX(), hero.getPositionY(), hero.isAlive(), hero.isArmed());
 	}
 	
 	protected void updateDragon() {
+		updateInteractions();
 		lab.updateBoardDragon(dragon.getPositionX(), dragon.getPositionY(), dragon.isAlive(), dragon.isOverlapping(), dragon.isSleeping());
 	}
 	
 	protected void updateSword() {
+		updateInteractions();
 		lab.updateBoardSword(sword.getPositionX(), sword.getPositionY(), sword.isAlive());
 	}
 	
