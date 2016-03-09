@@ -30,7 +30,7 @@ public class Jogo {
 	}
 
 	public boolean moveHeroDown() {
-		if (lab.getCell(hero.getPositionX(), hero.getPositionY() + 1) != 'x') {
+		if (lab.getCell(hero.getPositionX(), hero.getPositionY() + 1) == ' ' || lab.getCell(hero.getPositionX(), hero.getPositionY() + 1) == 'E' || (lab.getCell(hero.getPositionX(), hero.getPositionY() + 1) == 's' && !getDragon().isAlive())) {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveDown();
 			updateGame();
@@ -40,7 +40,7 @@ public class Jogo {
 	}
 	
 	public boolean moveHeroUp() {
-		if (lab.getCell(hero.getPositionX(), hero.getPositionY() - 1) != 'x') {
+		if (lab.getCell(hero.getPositionX(), hero.getPositionY() - 1) == ' ' || lab.getCell(hero.getPositionX(), hero.getPositionY() - 1) == 'E' || (lab.getCell(hero.getPositionX(), hero.getPositionY() - 1) == 's' && !getDragon().isAlive())) {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveUp();
 			updateGame();
@@ -50,7 +50,7 @@ public class Jogo {
 	}
 	
 	public boolean moveHeroLeft() {
-		if (lab.getCell(hero.getPositionX() - 1, hero.getPositionY()) != 'x') {
+		if (lab.getCell(hero.getPositionX() - 1, hero.getPositionY()) == ' ' || lab.getCell(hero.getPositionX() - 1, hero.getPositionY()) == 'E' || (lab.getCell(hero.getPositionX()  - 1, hero.getPositionY()) == 's' && !getDragon().isAlive())) {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveLeft();
 			updateGame();
@@ -60,7 +60,7 @@ public class Jogo {
 	}
 	
 	public boolean moveHeroRight() {
-		if (lab.getCell(hero.getPositionX() + 1, hero.getPositionY()) != 'x') {
+		if (lab.getCell(hero.getPositionX() + 1, hero.getPositionY()) == ' ' || lab.getCell(hero.getPositionX() + 1, hero.getPositionY()) == 'E' || (lab.getCell(hero.getPositionX() + 1, hero.getPositionY()) == 's' && !getDragon().isAlive())) {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveRight();
 			updateGame();
@@ -99,9 +99,11 @@ public class Jogo {
 		}
 		if (dragon.inRange(hero.getPositionX(), hero.getPositionY())) {
 			if (!hero.isArmed()) {
-				hero.setAlive(false);
-				fs = FinalState.DEFEAT;
-				done = true;	
+				if (!dragon.isSleeping()) {
+					hero.setAlive(false);
+					fs = FinalState.DEFEAT;
+					done = true;
+				}
 			} else {
 				dragon.setAlive(false);
 			}

@@ -5,6 +5,7 @@ import java.lang.Math;
 public class Dragao extends Elemento {
 	private boolean overlapping = false;
 	private boolean sleeping = false;
+	private boolean justWokeUp = false, justFellAsleep = false;
 	
 	public Dragao(Point pos) {
 		super(pos);
@@ -22,15 +23,31 @@ public class Dragao extends Elemento {
 		return overlapping;
 	}
 	
-	public void setOverlapping(boolean o) {
-		overlapping = o;
+	public void setOverlapping(boolean b) {
+		overlapping = b;
 	}
 	
 	public boolean isSleeping() {
 		return sleeping;
 	}
 	
-	public void setSleeping(boolean s) {
-		sleeping = s;
+	public void setSleeping(boolean b) {
+		sleeping = b;
+	}
+	
+	public void setJustWokeUp(boolean b) {
+		justWokeUp = b;
+	}
+	
+	public void setJustFellAsleep(boolean b) {
+		justFellAsleep = b;
+	}
+	
+	public boolean hasJustWokenUp() {
+		return justWokeUp;
+	}
+	
+	public boolean hasJustFallenAsleep() {
+		return justFellAsleep;
 	}
 }

@@ -13,10 +13,13 @@ public class JogoDragaoAdormece extends JogoMovimentoAleatorio {
 	}
 	
 	public void moveDragon() {
+		getDragon().setJustWokeUp(false);
+		getDragon().setJustFellAsleep(false);
 		if (!getDragon().isSleeping()) {
 			float sleepingRoll = s.nextFloat();
 			if (sleepingRoll < SLEEPING_CHANCE) {
 				getDragon().setSleeping(true);
+				getDragon().setJustFellAsleep(true);
 			}
 			else {
 				boolean dragonMoved = false;
@@ -26,9 +29,10 @@ public class JogoDragaoAdormece extends JogoMovimentoAleatorio {
 			}
 		} else {
 			float wakingRoll = s.nextFloat();
-			if (wakingRoll < WAKING_CHANCE)
+			if (wakingRoll < WAKING_CHANCE) {
 				getDragon().setSleeping(false);
-			super.updateDragon();
+				getDragon().setJustWokeUp(true);
+			}
 		}
 		updateGame();
 	}

@@ -10,14 +10,40 @@ public class Main {
 	
 	// Interface com a linha de comandos
 	// Os numeros 8, 2, 4, 6 correspondem a cima, baixo, direita e esquerda respectivamente
-	// qualquer outro numero termina o programa
+	// qualquer outro input termina o programa
 	public static void main(String[] args) {
 		int move;
 		Scanner s = new Scanner(System.in);
 		
 		MazeBuilder mb = new MazeBuilder();
-		char[][] board = mb.buildMaze(9);
-		Jogo game = new JogoDragaoAdormece(board);
+		Jogo game = new Jogo(mb.buildMaze(7));
+		
+		System.out.println("Modos de jogo :");
+		System.out.println("1 - Jogo normal");
+		System.out.println("2 - Dragão c/ movimento aleatório");
+		System.out.println("3 - Dragão pode adormecer:");
+		System.out.print("Escolha o tipo de jogo > ");
+		int gameMode = s.nextInt();
+		System.out.println();
+		System.out.print("Escolha a dimensão do labirinto (número ímpar) > ");
+		int labSize = s.nextInt();
+		System.out.println();
+		
+		switch(gameMode) {
+		case 1:
+			game = new Jogo(mb.buildMaze(labSize));
+			break;
+		case 2:
+			game = new JogoMovimentoAleatorio(mb.buildMaze(labSize));
+			break;
+		case 3:
+			game = new JogoDragaoAdormece(mb.buildMaze(labSize));
+			break;
+		default:
+			System.out.println("That is not a valid game mode. Game exiting ...");
+			game.setDone(true);
+			break;
+		}
 		
 		System.out.println("Labirinto inicial :");
 		game.display();
@@ -54,10 +80,18 @@ public class Main {
 			System.out.println("Labirinto após movimento do herói :");
 			game.display();
 			if ((game instanceof JogoMovimentoAleatorio) || (game instanceof JogoDragaoAdormece)) {
-				System.out.println("O dragão está a mover-se ... ");
-				System.out.println("Labirinto após movimento do dragão :");
-				game.moveDragon();
-				game.display();
+				if (game.getDragon().isAlive()) {
+					System.out.println("O dragão está a mover-se ... ");
+					game.moveDragon();
+					if (game instanceof JogoDragaoAdormece) {
+						if (game.getDragon().hasJustFallenAsleep())
+							System.out.println("O dragão adormeceu!");
+						if (game.getDragon().hasJustWokenUp())
+							System.out.println("O dragão acordou!");
+					}
+					System.out.println("Labirinto após movimento do dragão :");
+					game.display();
+				}
 			}
 		}
 		s.close();
