@@ -5,6 +5,8 @@ import java.util.Random;
 import java.util.Stack;
 
 public class MazeBuilder implements IMazeBuilder {
+	private static final int DRAGON_NUMBER = 2;
+	
 	private char[][] maze;
 	private char[][] visited;
 	private Stack<Point> history;
@@ -12,7 +14,7 @@ public class MazeBuilder implements IMazeBuilder {
 	
 	@Override
 	public char[][] buildMaze(int size) throws IllegalArgumentException {
-		if (size % 2 == 0) throw new IllegalArgumentException();
+		if (size % 2 == 0 || size < 4) throw new IllegalArgumentException();
 		
 		maze = new char[size][size];
 		visited = new char[(size-1)/2][(size-1)/2];
@@ -61,11 +63,13 @@ public class MazeBuilder implements IMazeBuilder {
 		} while (maze[heroX][heroY] != ' ');
 		maze[heroX][heroY] = 'H';
 		
-		do {
-			dragonX = r.nextInt(maze.length);
-			dragonY = r.nextInt(maze.length);
-		} while (maze[dragonX][dragonY] != ' ' || isAdjacent(heroX, heroY, dragonX, dragonY));
-		maze[dragonX][dragonY] = 'D';
+		for (int i = 0; i < DRAGON_NUMBER; i++) {
+			do {
+				dragonX = r.nextInt(maze.length);
+				dragonY = r.nextInt(maze.length);
+			} while (maze[dragonX][dragonY] != ' ' || isAdjacent(heroX, heroY, dragonX, dragonY));
+			maze[dragonX][dragonY] = 'D';
+		}
 		
 		do {
 			swordX = r.nextInt(maze.length);

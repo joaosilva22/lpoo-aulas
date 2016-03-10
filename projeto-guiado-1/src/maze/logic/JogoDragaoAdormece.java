@@ -13,27 +13,29 @@ public class JogoDragaoAdormece extends JogoMovimentoAleatorio {
 	}
 	
 	public void moveDragon() {
-		getDragon().setJustWokeUp(false);
-		getDragon().setJustFellAsleep(false);
-		if (!getDragon().isSleeping()) {
-			float sleepingRoll = s.nextFloat();
-			if (sleepingRoll < SLEEPING_CHANCE) {
-				getDragon().setSleeping(true);
-				getDragon().setJustFellAsleep(true);
-			}
-			else {
-				boolean dragonMoved = false;
-				while (!dragonMoved) {
-					dragonMoved = moveDragonRandom();
+		for (Dragao dragon : getDragon()) {
+			dragon.setJustWokeUp(false);
+			dragon.setJustFellAsleep(false);
+			if (!dragon.isSleeping()) {
+				float sleepingRoll = s.nextFloat();
+				if (sleepingRoll < SLEEPING_CHANCE) {
+					dragon.setSleeping(true);
+					dragon.setJustFellAsleep(true);
+				}
+				else {
+					boolean dragonMoved = false;
+					while (!dragonMoved) {
+						dragonMoved = moveDragonRandom(dragon);
+					}
+				}
+			} else {
+				float wakingRoll = s.nextFloat();
+				if (wakingRoll < WAKING_CHANCE) {
+					dragon.setSleeping(false);
+					dragon.setJustWokeUp(true);
 				}
 			}
-		} else {
-			float wakingRoll = s.nextFloat();
-			if (wakingRoll < WAKING_CHANCE) {
-				getDragon().setSleeping(false);
-				getDragon().setJustWokeUp(true);
-			}
+			updateGame();
 		}
-		updateGame();
 	}
 }

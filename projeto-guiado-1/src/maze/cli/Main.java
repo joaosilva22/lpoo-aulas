@@ -1,6 +1,8 @@
 package maze.cli;
 
 import java.util.Scanner;
+
+import maze.logic.Dragao;
 import maze.logic.Jogo;
 import maze.logic.JogoDragaoAdormece;
 import maze.logic.JogoMovimentoAleatorio;
@@ -25,19 +27,32 @@ public class Main {
 		System.out.print("Escolha o tipo de jogo > ");
 		int gameMode = s.nextInt();
 		System.out.println();
-		System.out.print("Escolha a dimensão do labirinto (número ímpar) > ");
-		int labSize = s.nextInt();
-		System.out.println();
+		
+		char[][] maze = {};
+		boolean labSizeChosen = true;
+		do {
+			System.out.print("Escolha a dimensão do labirinto (número ímpar) > ");
+			int labSize = s.nextInt();
+			System.out.println();
+			
+			labSizeChosen = true;
+			try {
+				maze = mb.buildMaze(labSize);
+			} catch (IllegalArgumentException e) {
+				System.out.println("Tamanho inválido, por favor tente de novo ...");
+				labSizeChosen = false;
+			}
+		} while (!labSizeChosen);
 		
 		switch(gameMode) {
 		case 1:
-			game = new Jogo(mb.buildMaze(labSize));
+			game = new Jogo(maze);
 			break;
 		case 2:
-			game = new JogoMovimentoAleatorio(mb.buildMaze(labSize));
+			game = new JogoMovimentoAleatorio(maze);
 			break;
 		case 3:
-			game = new JogoDragaoAdormece(mb.buildMaze(labSize));
+			game = new JogoDragaoAdormece(maze);
 			break;
 		default:
 			System.out.println("That is not a valid game mode. Game exiting ...");
@@ -80,15 +95,28 @@ public class Main {
 			System.out.println("Labirinto após movimento do herói :");
 			game.display();
 			if ((game instanceof JogoMovimentoAleatorio) || (game instanceof JogoDragaoAdormece)) {
-				if (game.getDragon().isAlive()) {
-					System.out.println("O dragão está a mover-se ... ");
+				if (game.isAnyDragonAlive()) {
+					if (game.getNumberOfAliveDragons() == 1)
+						System.out.println("O dragão está a mover-se ... ");
+					else
+						System.out.println("Os dragões estão a mover-se ... ");
 					game.moveDragon();
-					if (game instanceof JogoDragaoAdormece) {
-						if (game.getDragon().hasJustFallenAsleep())
-							System.out.println("O dragão adormeceu!");
-						if (game.getDragon().hasJustWokenUp())
-							System.out.println("O dragão acordou!");
+					
+					for (Dragao dragon : game.getDragon()) {
+						if (game instanceof JogoDragaoAdormece) {
+							if (dragon.hasJustFallenAsleep())
+								if (game.getNumberOfAliveDragons() == 1)
+									System.out.println("O dragão adormeceu!");
+								else
+									System.out.println("Um dragão adormeceu!");
+							if (dragon.hasJustWokenUp())
+								if (game.getNumberOfAliveDragons() == 1)
+									System.out.println("O dragão acordou!");
+								else
+									System.out.println("Um dragão acordou!");
+						}
 					}
+					
 					System.out.println("Labirinto após movimento do dragão :");
 					game.display();
 				}

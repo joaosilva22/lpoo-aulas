@@ -17,45 +17,47 @@ public class JogoMovimentoAleatorio extends Jogo {
 	}
 	
 	public void moveDragon() {
-		if (!getDragon().isSleeping()) {
-			boolean dragonMoved = false;
-			while (!dragonMoved) {
-				dragonMoved = moveDragonRandom();
+		for (Dragao dragon : getDragon()) {
+			if (!dragon.isSleeping()) {
+				boolean dragonMoved = false;
+				while (!dragonMoved) {
+					dragonMoved = moveDragonRandom(dragon);
+				}
 			}
+			updateGame();
 		}
-		updateGame();
 	}
 	
-	protected boolean moveDragonRandom() {
+	protected boolean moveDragonRandom(Dragao dragon) {
 		int direction = r.nextInt(4);
 		boolean success = false;
 		if (direction == 0) {
-			if (getLab().getCell(getDragon().getPositionX(), getDragon().getPositionY() - 1) != 'x'
-				&& getLab().getCell(getDragon().getPositionX(), getDragon().getPositionY() - 1) != 's') {
+			if (getLab().getCell(dragon.getPositionX(), dragon.getPositionY() - 1) != 'x'
+				&& getLab().getCell(dragon.getPositionX(), dragon.getPositionY() - 1) != 's') {
 				success = true;
-				getLab().cleanCell(getDragon().getPositionX(), getDragon().getPositionY());
-				getDragon().moveUp();
+				getLab().cleanCell(dragon.getPositionX(), dragon.getPositionY());
+				dragon.moveUp();
 			}
 		} else if (direction == 1) {
-			if (getLab().getCell(getDragon().getPositionX(), getDragon().getPositionY() + 1) != 'x'
-				&& getLab().getCell(getDragon().getPositionX(), getDragon().getPositionY() + 1) != 's') {
+			if (getLab().getCell(dragon.getPositionX(), dragon.getPositionY() + 1) != 'x'
+				&& getLab().getCell(dragon.getPositionX(), dragon.getPositionY() + 1) != 's') {
 				success = true;
-				getLab().cleanCell(getDragon().getPositionX(), getDragon().getPositionY());
-				getDragon().moveDown();
+				getLab().cleanCell(dragon.getPositionX(), dragon.getPositionY());
+				dragon.moveDown();
 			}
 		} else if (direction == 2) {
-			if (getLab().getCell(getDragon().getPositionX() - 1, getDragon().getPositionY()) != 'x'
-				&& getLab().getCell(getDragon().getPositionX() - 1, getDragon().getPositionY()) != 's') {
+			if (getLab().getCell(dragon.getPositionX() - 1, dragon.getPositionY()) != 'x'
+				&& getLab().getCell(dragon.getPositionX() - 1, dragon.getPositionY()) != 's') {
 				success = true;
-				getLab().cleanCell(getDragon().getPositionX(), getDragon().getPositionY());
-				getDragon().moveLeft();
+				getLab().cleanCell(dragon.getPositionX(), dragon.getPositionY());
+				dragon.moveLeft();
 			}
 		} else if (direction == 3) {
-			if (getLab().getCell(getDragon().getPositionX() + 1, getDragon().getPositionY()) != 'x'
-				&& getLab().getCell(getDragon().getPositionX() + 1, getDragon().getPositionY()) != 's') {
+			if (getLab().getCell(dragon.getPositionX() + 1, dragon.getPositionY()) != 'x'
+				&& getLab().getCell(dragon.getPositionX() + 1, dragon.getPositionY()) != 's') {
 				success = true;
-				getLab().cleanCell(getDragon().getPositionX(), getDragon().getPositionY());
-				getDragon().moveRight();
+				getLab().cleanCell(dragon.getPositionX(), dragon.getPositionY());
+				dragon.moveRight();
 			}
 		}
 		return success;

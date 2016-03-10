@@ -1,5 +1,7 @@
 package maze.logic;
 
+import java.util.ArrayList;
+
 public class Labirinto {
 	private char[][] board;
 	
@@ -49,8 +51,8 @@ public class Labirinto {
 	
 	public void display() {
 		System.out.printf("  ");
-		for (int k = 0; k < board.length; k++)
-			System.out.printf("%2d", k);
+		for (int k = 65; k < 65 + board.length; k++)
+			System.out.printf("%2c", k);
 		System.out.println();
 		for (int i = 0; i < board.length; i++) {
 			System.out.printf("%2d ", i);
@@ -77,17 +79,17 @@ public class Labirinto {
 		return p2;
 	}
 	
-	public Point findDragonPosition()
+	public ArrayList<Point> findDragonPosition()
 	{
+		ArrayList<Point> dragons = new ArrayList<Point>();
 		for(int i = 1; i < board.length - 1; i++)
 			for(int j = 1; j < board[i].length - 1; j++)
 				if(board[i][j] == 'D')
 				{
 					Point p = new Point (j,i);
-					return p;
+					dragons.add(p);
 				}
-		Point p2 = new Point(-1, -1);
-		return p2;
+		return dragons;
 	}
 	
 	public Point findSwordPosition()

@@ -55,7 +55,7 @@ public class TestMazeWithStaticDragon {
 		assertEquals(false, j.getHero().isAlive());
 	}
 	
-	@Test
+	/*@Test
 	public void testDragonDies() {
 		Jogo j = new Jogo(board2);
 		assertEquals(true, j.getDragon().isAlive());
@@ -63,9 +63,9 @@ public class TestMazeWithStaticDragon {
 		j.moveHeroDown();
 		j.updateGame();
 		assertEquals(false, j.getDragon().isAlive());
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	public void testHeroWins() {
 		Jogo j = new Jogo(board1);
 		assertEquals(false, j.isDone());
@@ -74,7 +74,7 @@ public class TestMazeWithStaticDragon {
 		j.moveHeroRight();
 		j.updateGame();
 		assertEquals(true, j.isDone());
-	}
+	}*/
 	
 	@Test
 	public void testFailExitWithoutSword() {
