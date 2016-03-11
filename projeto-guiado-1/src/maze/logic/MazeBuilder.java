@@ -82,7 +82,7 @@ public class MazeBuilder implements IMazeBuilder {
 	
 	private void initMaze() {
 		for (char[] line : maze)
-			Arrays.fill(line, 'x');
+			Arrays.fill(line, 'X');
 		
 		for (char[] line : visited)
 			Arrays.fill(line, '.');
@@ -101,13 +101,13 @@ public class MazeBuilder implements IMazeBuilder {
 			p.set(r.nextInt((maze.length-1)/2) * 2 + 1, r.nextInt((maze.length-1)/2) * 2 + 1);
 		} while (p.getX() != 1 && p.getY() != 1 && p.getX() != maze.length - 2 && p.getY() != maze.length - 2);
 		if (p.getX() == 1)
-			maze[p.getX() - 1][p.getY()] = 's';
+			maze[p.getX() - 1][p.getY()] = 'S';
 		else if (p.getX() == maze.length - 2) 
-			maze[p.getX() + 1][p.getY()] = 's';
+			maze[p.getX() + 1][p.getY()] = 'S';
 		else if (p.getY() == 1) 
-			maze[p.getX()][p.getY() - 1] = 's';
+			maze[p.getX()][p.getY() - 1] = 'S';
 		else 
-			maze[p.getX()][p.getY() + 1] = 's';
+			maze[p.getX()][p.getY() + 1] = 'S';
 		history.push(p);
 		visited[(p.getX()-1)/2][(p.getY()-1)/2] = '+';
 	}

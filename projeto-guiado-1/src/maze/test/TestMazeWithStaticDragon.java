@@ -6,19 +6,19 @@ import maze.logic.*;
 
 public class TestMazeWithStaticDragon {
 	private char[][] board1 = {
-			{'x', 'x', 'x', 'x', 'x'},
-			{'x', ' ', ' ', 'H', 's'},
-			{'x', ' ', 'x', ' ', 'x'},
-			{'x', 'E', ' ', 'D', 'x'},
-			{'x', 'x', 'x', 'x', 'x'}				  
+			{'X', 'X', 'X', 'X', 'X'},
+			{'X', ' ', ' ', 'H', 'S'},
+			{'X', ' ', 'X', ' ', 'X'},
+			{'X', 'E', ' ', 'D', 'X'},
+			{'X', 'X', 'X', 'X', 'X'}				  
 	};
 	
 	private char[][] board2 = {
-			{'x', 'x', 'x', 'x', 'x'},
-			{'x', ' ', 'E', 'H', 's'},
-			{'x', ' ', 'x', ' ', 'x'},
-			{'x', ' ', ' ', 'D', 'x'},
-			{'x', 'x', 'x', 'x', 'x'}				  
+			{'X', 'X', 'X', 'X', 'X'},
+			{'X', ' ', 'E', 'H', 'S'},
+			{'X', ' ', 'X', ' ', 'X'},
+			{'X', ' ', ' ', 'D', 'X'},
+			{'X', 'X', 'X', 'X', 'X'}				  
 	};
 
 	@Test
@@ -42,7 +42,6 @@ public class TestMazeWithStaticDragon {
 		Jogo j = new Jogo(board2);
 		assertEquals(false, j.getHero().isArmed());
 		j.moveHeroLeft();
-		j.updateGame();
 		assertEquals(true, j.getHero().isArmed());
 	}
 		
@@ -51,30 +50,27 @@ public class TestMazeWithStaticDragon {
 		Jogo j = new Jogo(board1);
 		assertEquals(false, j.getHero().isArmed());
 		j.moveHeroDown();
-		j.updateGame();
 		assertEquals(false, j.getHero().isAlive());
 	}
 	
-	/*@Test
+	@Test
 	public void testDragonDies() {
 		Jogo j = new Jogo(board2);
-		assertEquals(true, j.getDragon().isAlive());
+		assertEquals(true, j.getDragon().get(0).isAlive());
 		j.getHero().setArmed(true);
 		j.moveHeroDown();
-		j.updateGame();
-		assertEquals(false, j.getDragon().isAlive());
-	}*/
+		assertEquals(false, j.getDragon().get(0).isAlive());
+	}
 	
-	/*@Test
+	@Test
 	public void testHeroWins() {
 		Jogo j = new Jogo(board1);
 		assertEquals(false, j.isDone());
-		j.getDragon().setAlive(false);
+		j.getDragon().get(0).setAlive(false);
 		j.getHero().setArmed(true);
 		j.moveHeroRight();
-		j.updateGame();
 		assertEquals(true, j.isDone());
-	}*/
+	}
 	
 	@Test
 	public void testFailExitWithoutSword() {
@@ -82,7 +78,6 @@ public class TestMazeWithStaticDragon {
 		assertEquals(false, j.getHero().isArmed());
 		assertEquals(false, j.isDone());
 		j.moveHeroRight();
-		j.updateGame();
 		assertEquals(false, j.isDone());
 	}
 	
@@ -93,7 +88,6 @@ public class TestMazeWithStaticDragon {
 		assertEquals(false, j.isDone());
 		assertEquals(true, j.getHero().isArmed());
 		j.moveHeroRight();
-		j.updateGame();
 		assertEquals(false, j.isDone());
 	}
 }

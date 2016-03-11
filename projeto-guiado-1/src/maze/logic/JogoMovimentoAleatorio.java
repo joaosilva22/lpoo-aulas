@@ -32,29 +32,29 @@ public class JogoMovimentoAleatorio extends Jogo {
 		int direction = r.nextInt(4);
 		boolean success = false;
 		if (direction == 0) {
-			if (getLab().getCell(dragon.getPositionX(), dragon.getPositionY() - 1) != 'x'
-				&& getLab().getCell(dragon.getPositionX(), dragon.getPositionY() - 1) != 's') {
+			if (getLab().getCell(dragon.getPositionX(), dragon.getPositionY() - 1) != 'X'
+				&& getLab().getCell(dragon.getPositionX(), dragon.getPositionY() - 1) != 'S') {
 				success = true;
 				getLab().cleanCell(dragon.getPositionX(), dragon.getPositionY());
 				dragon.moveUp();
 			}
 		} else if (direction == 1) {
-			if (getLab().getCell(dragon.getPositionX(), dragon.getPositionY() + 1) != 'x'
-				&& getLab().getCell(dragon.getPositionX(), dragon.getPositionY() + 1) != 's') {
+			if (getLab().getCell(dragon.getPositionX(), dragon.getPositionY() + 1) != 'X'
+				&& getLab().getCell(dragon.getPositionX(), dragon.getPositionY() + 1) != 'S') {
 				success = true;
 				getLab().cleanCell(dragon.getPositionX(), dragon.getPositionY());
 				dragon.moveDown();
 			}
 		} else if (direction == 2) {
-			if (getLab().getCell(dragon.getPositionX() - 1, dragon.getPositionY()) != 'x'
-				&& getLab().getCell(dragon.getPositionX() - 1, dragon.getPositionY()) != 's') {
+			if (getLab().getCell(dragon.getPositionX() - 1, dragon.getPositionY()) != 'X'
+				&& getLab().getCell(dragon.getPositionX() - 1, dragon.getPositionY()) != 'S') {
 				success = true;
 				getLab().cleanCell(dragon.getPositionX(), dragon.getPositionY());
 				dragon.moveLeft();
 			}
 		} else if (direction == 3) {
-			if (getLab().getCell(dragon.getPositionX() + 1, dragon.getPositionY()) != 'x'
-				&& getLab().getCell(dragon.getPositionX() + 1, dragon.getPositionY()) != 's') {
+			if (getLab().getCell(dragon.getPositionX() + 1, dragon.getPositionY()) != 'X'
+				&& getLab().getCell(dragon.getPositionX() + 1, dragon.getPositionY()) != 'S') {
 				success = true;
 				getLab().cleanCell(dragon.getPositionX(), dragon.getPositionY());
 				dragon.moveRight();

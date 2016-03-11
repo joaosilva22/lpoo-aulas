@@ -38,7 +38,7 @@ public class Jogo {
 	}
 
 	public boolean moveHeroDown() {
-		if (lab.getCell(hero.getPositionX(), hero.getPositionY() + 1) == ' ' || lab.getCell(hero.getPositionX(), hero.getPositionY() + 1) == 'E' || (lab.getCell(hero.getPositionX(), hero.getPositionY() + 1) == 's' && !isAnyDragonAlive())) {
+		if (lab.getCell(hero.getPositionX(), hero.getPositionY() + 1) == ' ' || lab.getCell(hero.getPositionX(), hero.getPositionY() + 1) == 'E' || (lab.getCell(hero.getPositionX(), hero.getPositionY() + 1) == 'S' && !isAnyDragonAlive())) {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveDown();
 			updateGame();
@@ -48,7 +48,7 @@ public class Jogo {
 	}
 	
 	public boolean moveHeroUp() {
-		if (lab.getCell(hero.getPositionX(), hero.getPositionY() - 1) == ' ' || lab.getCell(hero.getPositionX(), hero.getPositionY() - 1) == 'E' || (lab.getCell(hero.getPositionX(), hero.getPositionY() - 1) == 's' && !isAnyDragonAlive())) {
+		if (lab.getCell(hero.getPositionX(), hero.getPositionY() - 1) == ' ' || lab.getCell(hero.getPositionX(), hero.getPositionY() - 1) == 'E' || (lab.getCell(hero.getPositionX(), hero.getPositionY() - 1) == 'S' && !isAnyDragonAlive())) {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveUp();
 			updateGame();
@@ -58,7 +58,7 @@ public class Jogo {
 	}
 	
 	public boolean moveHeroLeft() {
-		if (lab.getCell(hero.getPositionX() - 1, hero.getPositionY()) == ' ' || lab.getCell(hero.getPositionX() - 1, hero.getPositionY()) == 'E' || (lab.getCell(hero.getPositionX()  - 1, hero.getPositionY()) == 's' && !isAnyDragonAlive())) {
+		if (lab.getCell(hero.getPositionX() - 1, hero.getPositionY()) == ' ' || lab.getCell(hero.getPositionX() - 1, hero.getPositionY()) == 'E' || (lab.getCell(hero.getPositionX()  - 1, hero.getPositionY()) == 'S' && !isAnyDragonAlive())) {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveLeft();
 			updateGame();
@@ -68,7 +68,7 @@ public class Jogo {
 	}
 	
 	public boolean moveHeroRight() {
-		if (lab.getCell(hero.getPositionX() + 1, hero.getPositionY()) == ' ' || lab.getCell(hero.getPositionX() + 1, hero.getPositionY()) == 'E' || (lab.getCell(hero.getPositionX() + 1, hero.getPositionY()) == 's' && !isAnyDragonAlive())) {
+		if (lab.getCell(hero.getPositionX() + 1, hero.getPositionY()) == ' ' || lab.getCell(hero.getPositionX() + 1, hero.getPositionY()) == 'E' || (lab.getCell(hero.getPositionX() + 1, hero.getPositionY()) == 'S' && !isAnyDragonAlive())) {
 			lab.cleanCell(hero.getPositionX(), hero.getPositionY());
 			hero.moveRight();
 			updateGame();
@@ -123,10 +123,10 @@ public class Jogo {
 				dragon.setOverlapping(true);
 			else
 				dragon.setOverlapping(false);
-			if (!dragon.isAlive() && lab.getCell(hero.getPositionX(), hero.getPositionY()) == 's' && hero.isArmed()) {
-				fs = FinalState.VICTORY;
-				done = true;
-			}
+		}
+		if (getNumberOfAliveDragons() == 0 && lab.getCell(hero.getPositionX(), hero.getPositionY()) == 'S' && hero.isArmed()) {
+			fs = FinalState.VICTORY;
+			done = true;
 		}
 	}
 	
