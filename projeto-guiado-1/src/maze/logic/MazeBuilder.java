@@ -5,12 +5,20 @@ import java.util.Random;
 import java.util.Stack;
 
 public class MazeBuilder implements IMazeBuilder {
-	private static final int DRAGON_NUMBER = 2;
-	
 	private char[][] maze;
 	private char[][] visited;
 	private Stack<Point> history;
 	private Random r;
+	private int dragonNumber = 1;
+	
+	public MazeBuilder() {}
+	
+	public MazeBuilder(int numberOfDragons) throws IllegalArgumentException {
+		if (numberOfDragons > 0 && numberOfDragons < 5)
+			dragonNumber = numberOfDragons;
+		else
+			throw new IllegalArgumentException();
+	}
 	
 	@Override
 	public char[][] buildMaze(int size) throws IllegalArgumentException {
@@ -63,7 +71,7 @@ public class MazeBuilder implements IMazeBuilder {
 		} while (maze[heroX][heroY] != ' ');
 		maze[heroX][heroY] = 'H';
 		
-		for (int i = 0; i < DRAGON_NUMBER; i++) {
+		for (int i = 0; i < dragonNumber; i++) {
 			do {
 				dragonX = r.nextInt(maze.length);
 				dragonY = r.nextInt(maze.length);
