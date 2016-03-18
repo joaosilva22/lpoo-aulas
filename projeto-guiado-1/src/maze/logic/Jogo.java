@@ -171,4 +171,10 @@ public class Jogo {
 				count++;
 		return count;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return lab.toString() + "\n";
+	}
 }

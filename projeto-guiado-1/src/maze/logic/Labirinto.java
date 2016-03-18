@@ -104,4 +104,23 @@ public class Labirinto {
 		Point p2 = new Point(-1, -1);
 		return p2;
 	}
+	
+	@Override
+	public String toString()
+	{
+		String r = "";
+		r += "\n";
+		for (int i = 0; i < board.length; i++) {
+			r += "  ";
+			for (int j = 0; j < board[i].length; j++)
+				r += board[i][j] + " ";
+			r += "\n";
+		}
+		
+		return r;
+	}
+	
+	public int getSize() {
+		return board.length;
+	}
 }
